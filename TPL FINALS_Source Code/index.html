@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Theory Of Programming Language</title>
+    <link rel="stylesheet" href="design.css" />
+  </head>
+  <div class="container">
+    <div class="card" data-tilt>
+    <h2>Mini Compiler</h2>
+    <input type="file" id="fileInput" />
+    <br />
+    <textarea id="codeTextArea" rows="10" cols="50"></textarea>
+    <br />
+    <button onclick="openFile()">Open File</button>
+    <i class="bx bxs-file-blank"></i>
+    <button onclick="performLexicalAnalysis()" id="lexicalButton" disabled>
+      Lexical Analysis
+    </button>
+    <button onclick="performSyntaxAnalysis()" id="syntaxButton" disabled>
+      Syntax Analysis
+    </button>
+    <button onclick="performSemanticAnalysis()" id="semanticButton" disabled>
+      Semantic Analysis
+    </button>
+    <button onclick="clearResults()">Clear</button>
+    <i class="bx bxs-trash-alt"></i>
+
+    <div class="result">
+      <h2>Result</h2>
+      <textarea id="resultTextArea" rows="10" cols="50" readonly></textarea>
+    </div>
+    </div>
+
+   
+    <script src = "vanilla-tilt.js"></script> 
+
+    <script>
+      function openFile() {
+        // Get the input element
+        var fileInput = document.getElementById("fileInput");
+        // Check if a file is selected
+        if (fileInput.files.length > 0) {
+          var file = fileInput.files[0];
+          var reader = new FileReader();
+          reader.onload = function (e) {
+            // Set the content of the textarea to the file's content
+            document.getElementById("codeTextArea").value = e.target.result;
+            // Enable the lexical analysis button
+            document.getElementById("lexicalButton").disabled = false;
+            // Disable the syntax analysis button
+            document.getElementById("syntaxButton").disabled = true;
+            // Disable the semantic analysis button
+            document.getElementById("semanticButton").disabled = true;
+          };
+          // Read the contents of the file as text
+          reader.readAsText(file);
+        } else {
+          alert("Please select a file.");
+        }
+      }
+
+      function performLexicalAnalysis() {
+        // Get the content of the code textarea
+        var codeContent = document.getElementById("codeTextArea").value;
+        // Perform lexical analysis (replace this with your actual lexical analysis logic)
+        var lexicalResult = "Lexical analysis result:\n" + codeContent;
+        // Display the result in the result textarea
+        document.getElementById("resultTextArea").value = lexicalResult;
+        // Enable the syntax analysis button
+        document.getElementById("syntaxButton").disabled = false;
+        // Disable the lexical analysis button
+        document.getElementById("lexicalButton").disabled = true;
+        // Disable the semantic analysis button
+        document.getElementById("semanticButton").disabled = true;
+      }
+
+      function performSyntaxAnalysis() {
+        // Get the content of the code textarea
+        var codeContent = document.getElementById("codeTextArea").value;
+        // Perform syntax analysis (replace this with your actual syntax analysis logic)
+        var syntaxResult = "Syntax analysis result:\n" + codeContent;
+        // Display the result in the result textarea
+        document.getElementById("resultTextArea").value = syntaxResult;
+        // Enable the semantic analysis button
+        document.getElementById("semanticButton").disabled = false;
+        // Disable the syntax analysis button
+        document.getElementById("syntaxButton").disabled = true;
+      }
+
+      function performSemanticAnalysis() {
+        // Get the content of the code textarea
+        var codeContent = document.getElementById("codeTextArea").value;
+        // Perform semantic analysis (replace this with your actual semantic analysis logic)
+        var semanticResult = "Semantic analysis result:\n" + codeContent;
+        // Display the result in the result textarea
+        document.getElementById("resultTextArea").value = semanticResult;
+        // Disable the semantic analysis button
+        document.getElementById("semanticButton").disabled = true;
+      }
+
+      function clearResults() {
+        // Clear both the code and result text areas
+        document.getElementById("codeTextArea").value = "";
+        document.getElementById("resultTextArea").value = "";
+        // Disable all analysis buttons
+        document.getElementById("lexicalButton").disabled = true;
+        document.getElementById("syntaxButton").disabled = true;
+        document.getElementById("semanticButton").disabled = true;
+      }
+    </script>
+
+    
+  </body>
+  </div>
+</html>
